@@ -7,8 +7,8 @@ const MainContent = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-screen w-screen flex items-center justify-center bg-neutral-50">
-        <div className="text-neutral-500">Loading...</div>
+      <div className="h-screen w-screen flex items-center justify-center bg-background">
+        <div className="text-muted-foreground text-sm">Loading…</div>
       </div>
     ),
   }

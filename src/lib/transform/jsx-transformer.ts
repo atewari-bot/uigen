@@ -321,8 +321,8 @@ export function createPreviewHTML(
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     #root {
-      width: 100vw;
-      height: 100vh;
+      min-height: 100vh;
+      width: 100%;
     }
     .error-boundary {
       color: red;
