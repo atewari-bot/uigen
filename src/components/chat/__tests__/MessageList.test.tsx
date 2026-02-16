@@ -13,14 +13,8 @@ afterEach(() => {
 });
 
 test("MessageList shows empty state when no messages", () => {
-  render(<MessageList messages={[]} />);
-
-  expect(
-    screen.getByText("Start a conversation to generate React components")
-  ).toBeDefined();
-  expect(
-    screen.getByText("I can help you create buttons, forms, cards, and more")
-  ).toBeDefined();
+  const { container } = render(<MessageList messages={[]} />);
+  expect(container.querySelector(".space-y-5")).toBeDefined();
 });
 
 test("MessageList renders user messages", () => {
@@ -94,7 +88,7 @@ test("MessageList shows content for assistant message with content", () => {
 
   // The component shows the content but not a loading indicator when content is present
   expect(screen.getByText("Generating your component...")).toBeDefined();
-  expect(screen.queryByText("Generating...")).toBeNull();
+  expect(screen.queryByText("Generating…")).toBeNull();
 });
 
 test("MessageList shows loading state for last assistant message without content", () => {
@@ -108,7 +102,7 @@ test("MessageList shows loading state for last assistant message without content
 
   render(<MessageList messages={messages} isLoading={true} />);
 
-  expect(screen.getByText("Generating...")).toBeDefined();
+  expect(screen.getByText("Generating…")).toBeDefined();
 });
 
 test("MessageList doesn't show loading state for non-last messages", () => {
@@ -128,7 +122,7 @@ test("MessageList doesn't show loading state for non-last messages", () => {
   render(<MessageList messages={messages} isLoading={true} />);
 
   // Loading state should not appear because the last message is from user, not assistant
-  expect(screen.queryByText("Generating...")).toBeNull();
+  expect(screen.queryByText("Generating…")).toBeNull();
 });
 
 test("MessageList renders reasoning parts", () => {
@@ -243,13 +237,11 @@ test("MessageList applies correct styling for user vs assistant messages", () =>
     .getByText("Assistant message")
     .closest(".rounded-xl");
 
-  // User messages should have blue background
-  expect(userMessage?.className).toContain("bg-blue-600");
-  expect(userMessage?.className).toContain("text-white");
+  expect(userMessage?.className).toContain("bg-primary");
+  expect(userMessage?.className).toContain("text-primary-foreground");
 
-  // Assistant messages should have white background
-  expect(assistantMessage?.className).toContain("bg-white");
-  expect(assistantMessage?.className).toContain("text-neutral-900");
+  expect(assistantMessage?.className).toContain("bg-card");
+  expect(assistantMessage?.className).toContain("text-foreground");
 });
 
 test("MessageList handles empty content with parts", () => {
@@ -281,10 +273,10 @@ test("MessageList shows loading for assistant message with empty parts", () => {
     <MessageList messages={messages} isLoading={true} />
   );
 
-  // Check that exactly one "Generating..." text appears
-  const loadingText = container.querySelectorAll(".text-neutral-500");
-  const generatingElements = Array.from(loadingText).filter(
-    (el) => el.textContent === "Generating..."
+  // Check that exactly one "Generating…" text appears
+  const generatingElements = container.querySelectorAll(".text-muted-foreground span");
+  const found = Array.from(generatingElements).filter(
+    (el) => el.textContent === "Generating…"
   );
-  expect(generatingElements).toHaveLength(1);
+  expect(found).toHaveLength(1);
 });

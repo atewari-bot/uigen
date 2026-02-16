@@ -75,7 +75,7 @@ JWT (HS256, 7-day expiry) stored in httpOnly cookies. `src/lib/auth.ts` handles 
 
 ## Testing
 
-Vitest with jsdom. Tests colocated in `__tests__/` directories. Use React Testing Library for component tests. `src/lib/__tests__/file-system.test.ts` is the most comprehensive suite.
+Vitest with jsdom. Config is in `vitest.config.mts`. Tests colocated in `__tests__/` directories. Use React Testing Library for component tests. `src/lib/__tests__/file-system.test.ts` is the most comprehensive suite.
 
 ## Key Extension Points
 

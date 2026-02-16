@@ -17,7 +17,7 @@ test("renders with placeholder text", () => {
 
   render(<MessageInput {...mockProps} />);
   
-  const textarea = screen.getByPlaceholderText("Describe the React component you want to create...");
+  const textarea = screen.getByPlaceholderText("Describe the React component you want to create…");
   expect(textarea).toBeDefined();
 });
 
@@ -46,7 +46,7 @@ test("calls handleInputChange when typing", async () => {
 
   render(<MessageInput {...mockProps} />);
   
-  const textarea = screen.getByPlaceholderText("Describe the React component you want to create...");
+  const textarea = screen.getByPlaceholderText("Describe the React component you want to create…");
   await userEvent.type(textarea, "Hello");
   
   expect(handleInputChange).toHaveBeenCalled();
@@ -184,8 +184,8 @@ test("applies correct CSS classes based on loading state", () => {
   );
 
   let submitButton = screen.getByRole("button");
-  expect(submitButton.className).toContain("disabled:opacity-40");
-  expect(submitButton.className).toContain("hover:bg-blue-50");
+  expect(submitButton.className).toContain("disabled:opacity-30");
+  expect(submitButton.className).toContain("hover:bg-primary/15");
 
   rerender(
     <MessageInput
@@ -198,7 +198,7 @@ test("applies correct CSS classes based on loading state", () => {
 
   submitButton = screen.getByRole("button");
   expect(submitButton.className).toContain("disabled:cursor-not-allowed");
-  expect(submitButton.className).toContain("disabled:opacity-40");
+  expect(submitButton.className).toContain("disabled:opacity-30");
 });
 
 test("applies pulse animation to send icon when loading", () => {
@@ -224,7 +224,7 @@ test("applies pulse animation to send icon when loading", () => {
   );
 
   sendIcon = screen.getByRole("button").querySelector("svg");
-  expect(sendIcon?.getAttribute("class")).toContain("text-neutral-300");
+  expect(sendIcon?.getAttribute("class")).toContain("text-muted-foreground/40");
 });
 
 test("textarea has correct styling classes", () => {
@@ -238,11 +238,11 @@ test("textarea has correct styling classes", () => {
   render(<MessageInput {...mockProps} />);
   
   const textarea = screen.getByRole("textbox");
-  expect(textarea.className).toContain("min-h-[80px]");
+  expect(textarea.className).toContain("min-h-[76px]");
   expect(textarea.className).toContain("max-h-[200px]");
   expect(textarea.className).toContain("resize-none");
   expect(textarea.className).toContain("focus:ring-2");
-  expect(textarea.className).toContain("focus:ring-blue-500/10");
+  expect(textarea.className).toContain("focus:ring-primary/25");
 });
 
 test("submit button click triggers form submission", async () => {

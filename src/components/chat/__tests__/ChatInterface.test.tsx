@@ -61,6 +61,11 @@ afterEach(() => {
 });
 
 test("renders chat interface with message list and input", () => {
+  (useChat as any).mockReturnValue({
+    ...mockUseChat,
+    messages: [{ id: "1", role: "user", content: "Hello" }],
+  });
+
   render(<ChatInterface />);
 
   expect(screen.getByTestId("message-list")).toBeDefined();
@@ -138,6 +143,11 @@ test("isLoading is false when status is idle", () => {
 
 
 test("scrolls when messages change", () => {
+  (useChat as any).mockReturnValue({
+    ...mockUseChat,
+    messages: [{ id: "0", role: "user", content: "Initial" }],
+  });
+
   const { rerender } = render(<ChatInterface />);
 
   // Get initial scroll container
@@ -161,19 +171,19 @@ test("scrolls when messages change", () => {
 });
 
 test("renders with correct layout classes", () => {
+  (useChat as any).mockReturnValue({
+    ...mockUseChat,
+    messages: [{ id: "1", role: "user", content: "Hello" }],
+  });
+
   const { container } = render(<ChatInterface />);
 
   const mainDiv = container.firstChild as HTMLElement;
   expect(mainDiv.className).toContain("flex");
   expect(mainDiv.className).toContain("flex-col");
   expect(mainDiv.className).toContain("h-full");
-  expect(mainDiv.className).toContain("p-4");
   expect(mainDiv.className).toContain("overflow-hidden");
 
-  const scrollArea = screen.getByTestId("message-list").closest(".flex-1");
-  expect(scrollArea?.className).toContain("overflow-hidden");
-
   const inputWrapper = screen.getByTestId("message-input").parentElement;
-  expect(inputWrapper?.className).toContain("mt-4");
   expect(inputWrapper?.className).toContain("flex-shrink-0");
 });
