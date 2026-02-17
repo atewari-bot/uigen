@@ -1,6 +1,18 @@
 {
   "permissions": {
-    "allow": ["mcp__playwright"],
+    "allow": [
+      "mcp__playwright",
+      "Bash(npm install:*)",
+      "Bash(npm show:*)",
+      "Bash(node -e:*)",
+      "Bash(# Install ai@6 to check what @ai-sdk/provider version it uses mkdir -p /tmp/ai6-check && cd /tmp/ai6-check && echo ''{}'' && npm install ai@6.0.86 --quiet ; cat /tmp/ai6-check/node_modules/@ai-sdk/provider/package.json)",
+      "Bash(# Install ai@6 deps to check useChat mkdir -p /tmp/ai6-react && cd /tmp/ai6-react && echo ''{}'' && npm install @ai-sdk/react@3.0.88 --quiet ; grep -n \"\"useChat\\\\|UIMessage\\\\|Message\"\" /tmp/ai6-react/node_modules/@ai-sdk/react/dist/index.d.ts)",
+      "Bash(npx vitest run:*)",
+      "Bash(git -C /Users/atewari/saraswati/uigen status:*)",
+      "Bash(git -C /Users/atewari/saraswati/uigen diff src/lib/prompts/generation.tsx)",
+      "Bash(git -C /Users/atewari/saraswati/uigen add src/lib/prompts/generation.tsx)",
+      "Bash(git -C:*)"
+    ],
     "deny": []
   }
 }
